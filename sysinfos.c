@@ -116,7 +116,10 @@ int cpu_fanpercent()
 	return 0;
 }
 
-#if !defined(__arm__) && !defined(__aarch64__)
+
+#if defined(__arm__) ||  defined(__aarch64__) || defined(__e2k__)
+#define cpuid(fn, out) out[0] = 0;
+#else
 static inline void cpuid(int functionnumber, int output[4]) {
 #ifdef _MSC_VER
 	// Microsoft compiler, intrin.h included
@@ -145,8 +148,6 @@ static inline void cpuid(int functionnumber, int output[4]) {
 	}
 #endif
 }
-#else /* !__arm__ */
-#define cpuid(fn, out) out[0] = 0;
 #endif
 
 // For the i7-5775C will output : Intel(R) Core(TM) i7-5775C CPU @ 3.30GHz
@@ -265,6 +266,8 @@ void cpu_bestfeature(char *outbuf, size_t maxsz)
 {
 #if defined(__arm__) || defined(__aarch64__)
 	sprintf(outbuf, "ARM");
+#elif defined(__e2k__)
+	sprintf(outbuf, "E2K");
 #else
 	int cpu_info[4] = { 0 };
 	int cpu_info_adv[4] = { 0 };

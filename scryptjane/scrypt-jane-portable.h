@@ -181,12 +181,16 @@
 	#define CPU_ALPHA
 #endif
 
+#if defined(__e2k__)
+	#define CPU_E2K
+#endif
+
 /* endian */
 
 #if ((defined(__BYTE_ORDER) && defined(__LITTLE_ENDIAN) && (__BYTE_ORDER == __LITTLE_ENDIAN)) || \
 	 (defined(BYTE_ORDER) && defined(LITTLE_ENDIAN) && (BYTE_ORDER == LITTLE_ENDIAN)) || \
 	 (defined(CPU_X86) || defined(CPU_X86_64)) || \
-	 (defined(vax) || defined(MIPSEL) || defined(_MIPSEL)))
+	 (defined(vax) || defined(MIPSEL) || defined(_MIPSEL)) || defined(CPU_E2K))
 #define CPU_LE
 #elif ((defined(__BYTE_ORDER) && defined(__BIG_ENDIAN) && (__BYTE_ORDER == __BIG_ENDIAN)) || \
 	   (defined(BYTE_ORDER) && defined(BIG_ENDIAN) && (BYTE_ORDER == BIG_ENDIAN)) || \

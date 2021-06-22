@@ -389,3 +389,10 @@ get_top_cpuflag_desc(size_t flag) {
 #endif
 
 #endif /* defined(CPU_X86) || defined(CPU_X86_64) */
+
+#if defined(CPU_E2K)
+    #undef X86_INTRINSIC_SSE
+    #undef X86_INTRINSIC_SSE2
+    #undef X86_INTRINSIC_SSSE3
+    #undef X86_INTRINSIC_AVX
+#endif

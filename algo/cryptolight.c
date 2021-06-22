@@ -4,7 +4,7 @@
 
 #include "miner.h"
 
-#if defined(__arm__) || defined(_MSC_VER)
+#if defined(__arm__) || defined(_MSC_VER) || defined(__e2k__)
 #ifndef NOASM
 #define NOASM
 #endif
